@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Ulang Tahun Aurelia - Unicorn Birthday Party</title>
+    <!-- Meta SEO -->
+    <meta name="description" content="Kamu diundang ke pesta ulang tahun Aurelia yang ke-5! Pesta bertema unicorn yang penuh keceriaan, warna-warni, dan keajaiban.">
+    <meta name="keywords" content="undangan digital, ulang tahun anak, unicorn theme, undangan ultah aurelia">
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="Undangan Ulang Tahun Aurelia - Unicorn Birthday Party">
+    <meta property="og:description" content="Kamu diundang ke pesta ulang tahun Aurelia yang ke-5! Pesta bertema unicorn yang penuh keceriaan.">
+    <meta property="og:image" content="assets/hero.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Canvas for Floating Sparkles / Particles -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Floating Background Audio Elements -->
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/active_storage/sfx/123/123-200.wav" type="audio/wav"> <!-- Fallback sound -->
+        <!-- We will configure a beautiful pastel melody in JS or fallback URL -->
+    </audio>
+    <button id="musicToggle" class="floating-btn music-btn hidden">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
+    <!-- 1. COVER / ENVELOPE OPENING -->
+    <div id="invitationCover" class="cover-overlay">
+        <div class="cover-card glassmorphism animate-pop">
+            <div class="cover-unicorn-badge">
+                <img src="assets/hero.png" alt="Unicorn Badge" class="spinning-unicorn">
+            </div>
+            <h3 class="sparkle-text">You're Invited to the Magic!</h3>
+            <h1 class="child-name-rainbow">Aurelia's</h1>
+            <p class="subtitle">5th Birthday Celebration</p>
+            
+            <div class="recipient-box">
+                <p class="recipient-label">Special Invitation For:</p>
+                <h2 id="guestName" class="recipient-name">Sahabat Terbaik</h2>
+            </div>
+            
+            <button id="btnOpenInvitation" class="btn btn-primary animate-bounce-soft">
+                <i class="fas fa-envelope-open-text"></i> Buka Undangan
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. MAIN CONTENT (Initially Hidden or Blurred, revealed after click) -->
+    <div id="mainContent" class="main-content content-hidden">
+        
+        <!-- Header Banner / Hero Section -->
+        <header class="hero-section">
+            <div class="hero-container">
+                <div class="hero-image-wrapper">
+                    <img src="assets/hero.png" alt="Happy Unicorn Aurelia" class="hero-image animate-float">
+                </div>
+                <div class="badge-age">5 Years Old</div>
+                <h2 class="pre-title">Pesta Ulang Tahun Ke-5</h2>
+                <h1 class="main-title gradient-text">Aurelia Putri</h1>
+                <p class="tagline">"Mari Berpetualang di Negeri Pelangi yang Penuh Keajaiban dan Kebahagiaan!"</p>
+                
+                <!-- Countdown Box -->
+                <div class="countdown-wrapper glassmorphism">
+                    <h3 class="countdown-title">Waktu Menuju Pesta Keajaiban:</h3>
+                    <div class="countdown-container">
+                        <div class="countdown-card">
+                            <span id="days" class="time-num">00</span>
+                            <span class="time-label">Hari</span>
+                        </div>
+                        <div class="countdown-card">
+                            <span id="hours" class="time-num">00</span>
+                            <span class="time-label">Jam</span>
+                        </div>
+                        <div class="countdown-card">
+                            <span id="minutes" class="time-num">00</span>
+                            <span class="time-label">Menit</span>
+                        </div>
+                        <div class="countdown-card">
+                            <span id="seconds" class="time-num">00</span>
+                            <span class="time-label">Detik</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Wave separator -->
+            <div class="custom-shape-divider-bottom">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C26.9,8.75,55.05,16.34,83.84,22.38,157.94,37.9,235.41,63.79,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
+        </header>
+
+        <!-- 3. EVENT DETAILS (WAKTU & TEMPAT) -->
+        <section id="eventDetails" class="section event-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-icon"><i class="fas fa-magic"></i></span>
+                    <h2 class="section-title">Detail Acara</h2>
+                    <p class="section-subtitle">Catat tanggal dan tempatnya agar tidak ketinggalan keseruannya!</p>
+                </div>
+
+                <div class="cards-grid">
+                    <!-- Date Card -->
+                    <div class="info-card glassmorphism" data-aos="fade-up">
+                        <div class="card-icon-wrapper circle-pink">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                        <h3>Hari & Tanggal</h3>
+                        <p class="date-text">Minggu, 12 Juli 2026</p>
+                        <p class="sub-text">Pukul: 15.00 - 18.00 WIB</p>
+                        <div class="calendar-btn-wrapper">
+                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ulang+Tahun+Aurelia+ke-5+%F0%9F%A6%84&dates=20260712T150000/20260712T180000&details=Pesta+ulang+tahun+Aurelia+ke-5+bertema+Unicorn.+Ditunggu+kehadirannya!&location=Istana+Pelangi+Playground,+Bandung" target="_blank" class="btn btn-secondary btn-sm">
+                                <i class="far fa-calendar-plus"></i> Tambah ke Kalender
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Location Card -->
+                    <div class="info-card glassmorphism" data-aos="fade-up">
+                        <div class="card-icon-wrapper circle-blue">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Lokasi Pesta</h3>
+                        <p class="location-title">Istana Pelangi Playground</p>
+                        <p class="sub-text">Jl. Pelangi Indah No. 7, Kota Bandung</p>
+                        
+                        <div class="map-embed-wrapper">
+                            <!-- Safe custom styled map placeholder that links to actual Google Maps -->
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.822849187313!2d107.61118671477382!3d-6.911762195005929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e63a34a317bf%3A0x6b8764a852dc8216!2sBandung%20Indah%20Plaza!5e0!3m2!1sid!2sid!4v1689100000000!5m2!1sid!2sid" 
+                                width="100%" 
+                                height="150" 
+                                style="border:0; border-radius: 12px;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+
+                        <a href="https://maps.google.com" target="_blank" class="btn btn-primary btn-sm mt-3">
+                            <i class="fas fa-route"></i> Petunjuk Arah Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. GALLERY (FOTO TERLUCU) -->
+        <section id="gallery" class="section gallery-section">
+            <!-- Top Wave -->
+            <div class="custom-shape-divider-top-gallery">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C26.9,8.75,55.05,16.34,83.84,22.38,157.94,37.9,235.41,63.79,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
+            
+            <div class="container">
+                <div class="section-header white-text">
+                    <span class="section-icon"><i class="fas fa-camera-retro"></i></span>
+                    <h2 class="section-title">Galeri Foto Aurelia</h2>
+                    <p class="section-subtitle">Intip senyum manis Aurelia yang siap menyambut teman-teman semua!</p>
+                </div>
+
+                <div class="polaroid-gallery">
+                    <div class="polaroid-card">
+                        <div class="polaroid-img-frame">
+                            <img src="assets/castle.png" alt="Foto Aurelia 1">
+                        </div>
+                        <p class="polaroid-caption">Negeri Dongeng Aurelia ✨</p>
+                    </div>
+                    <div class="polaroid-card">
+                        <div class="polaroid-img-frame">
+                            <img src="assets/hero.png" alt="Foto Aurelia 2">
+                        </div>
+                        <p class="polaroid-caption">Aurelia Si Unicorn 🦄</p>
+                    </div>
+                    <div class="polaroid-card">
+                        <div class="polaroid-img-frame animate-rotate-left">
+                            <!-- Clean placeholder or styled illustration -->
+                            <div class="custom-photo-placeholder placeholder-pastel-yellow">
+                                <i class="fas fa-cake-candles icon-lg"></i>
+                                <span>Menanti Lilin Ulang Tahun</span>
+                            </div>
+                        </div>
+                        <p class="polaroid-caption">Ulang Tahun Ke-5! 🎂</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. RSVP & WISHES WALL (BUKU TAMU & UCAPAN) -->
+        <section id="rsvp" class="section rsvp-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-icon"><i class="fas fa-heart"></i></span>
+                    <h2 class="section-title">Kehadiran & Ucapan</h2>
+                    <p class="section-subtitle">Kirimkan konfirmasi kehadiran dan doa terbaikmu untuk Aurelia!</p>
+                </div>
+
+                <div class="rsvp-layout">
+                    <!-- RSVP Form -->
+                    <div class="rsvp-form-card glassmorphism">
+                        <form id="rsvpForm">
+                            <div class="form-group">
+                                <label for="formName"><i class="fas fa-user"></i> Nama Lengkap</label>
+                                <input type="text" id="formName" name="name" class="form-control" placeholder="Tulis namamu disini..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label><i class="fas fa-envelope-open-text"></i> Konfirmasi Kehadiran</label>
+                                <div class="rsvp-radio-group">
+                                    <label class="rsvp-radio-container">
+                                        <input type="radio" name="attendance" value="hadir" checked>
+                                        <span class="checkmark"></span>
+                                        <span class="status-txt"><i class="fas fa-check-circle"></i> Hadir</span>
+                                    </label>
+                                    <label class="rsvp-radio-container">
+                                        <input type="radio" name="attendance" value="tidak_hadir">
+                                        <span class="checkmark"></span>
+                                        <span class="status-txt"><i class="fas fa-times-circle"></i> Berhalangan</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formMessage"><i class="fas fa-comment-dots"></i> Pesan & Ucapan</label>
+                                <textarea id="formMessage" name="message" class="form-control" rows="4" placeholder="Tulis doa atau ucapan selamat ulang tahun untuk Aurelia..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fas fa-paper-plane"></i> Kirim Ucapan 🎈
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Wishes Wall -->
+                    <div class="wishes-wall-card glassmorphism">
+                        <h3 class="wall-title"><i class="fas fa-comments"></i> Dinding Ucapan (<span id="wishesCount">0</span>)</h3>
+                        <div id="wishesList" class="wishes-container">
+                            <!-- Wishes will be loaded here dynamically by JavaScript -->
+                            <div class="wish-item-loading">Sedang memuat ucapan dari teman-teman...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. DIGITAL KADO / ANGPAO -->
+        <section id="gift" class="section gift-section">
+            <!-- Decorative wave top -->
+            <div class="custom-shape-divider-top-gift">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86C235.41,63.79,157.94,37.9,83.84,22.38,55.05,16.34,26.9,8.75,0,0V120H1200V95.83C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+                </svg>
+            </div>
+
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-icon"><i class="fas fa-gift"></i></span>
+                    <h2 class="section-title">Kado Digital (Gift Corner)</h2>
+                    <p class="section-subtitle">Tanpa mengurangi rasa hormat, bagi sahabat yang ingin mengirimkan kado/tanda kasih untuk Aurelia dapat melalui tombol di bawah ini:</p>
+                </div>
+
+                <div class="gift-box glassmorphism" data-aos="zoom-in">
+                    <div class="gift-illustration">
+                        <i class="fas fa-gift animate-heartbeat"></i>
+                    </div>
+                    
+                    <div class="gift-details">
+                        <!-- Account 1 -->
+                        <div class="bank-card">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg" alt="BCA" class="bank-logo">
+                            <div class="bank-info">
+                                <span class="bank-name">Bank BCA</span>
+                                <span class="account-number" id="accountNo1">1234567890</span>
+                                <span class="account-holder">a/n Ayah Aurelia</span>
+                            </div>
+                            <button class="btn btn-secondary btn-xs btn-copy" data-target="accountNo1">
+                                <i class="far fa-copy"></i> Salin
+                            </button>
+                        </div>
+                        
+                        <!-- Account 2 -->
+                        <div class="bank-card mt-3">
+                            <div class="bank-logo-placeholder">
+                                <i class="fas fa-wallet"></i> <span>E-Wallet</span>
+                            </div>
+                            <div class="bank-info">
+                                <span class="bank-name">Dana / Gopay</span>
+                                <span class="account-number" id="accountNo2">081234567890</span>
+                                <span class="account-holder">a/n Ibu Aurelia</span>
+                            </div>
+                            <button class="btn btn-secondary btn-xs btn-copy" data-target="accountNo2">
+                                <i class="far fa-copy"></i> Salin
+                            </button>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="address-card mt-3">
+                            <div class="address-icon"><i class="fas fa-home"></i></div>
+                            <div class="address-info">
+                                <span class="address-title">Alamat Pengiriman Kado:</span>
+                                <span class="address-text" id="giftAddress">Perumahan Bunga Melati Block C-12, Coblong, Kota Bandung</span>
+                            </div>
+                            <button class="btn btn-secondary btn-xs btn-copy" data-target="giftAddress">
+                                <i class="far fa-copy"></i> Salin
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-unicorn">
+                <i class="fas fa-hand-holding-heart"></i>
+            </div>
+            <p class="footer-thanks">Terima kasih atas kehadiran & doa restu Anda!</p>
+            <h3 class="footer-brand">Aurelia's Magical Birthday</h3>
+            <p class="credit">Dibuat dengan penuh cinta 💖 | © 2026 Aurelia & Keluarga</p>
+        </footer>
+
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden">Teks berhasil disalin! 🦄</div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
